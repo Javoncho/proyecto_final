@@ -23,6 +23,8 @@ from ejemplo.views import (index, buscar, monstrar_familiares,
                             ActualizarFamiliar, BorrarFamiliar,
                             FamiliarList, FamiliarCrear, FamiliarBorrar, FamiliarActualizar, FamiliarDetalle)
 
+from tp_final.views import index, PostList
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludar/', index), # ESTA ES LA NUEVA FUNCTION
@@ -39,4 +41,6 @@ urlpatterns = [
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
     path('panel-familia/<int:pk>/detalle', FamiliarDetalle.as_view()),
     path('success_updated_message/',TemplateView.as_view(template_name="ejemplo/success_updated_message.html")),
+    path('tp_final/', index),
+    path('tp_final/listar', PostList.as_view())
 ]
