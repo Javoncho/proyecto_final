@@ -1,1 +1,8 @@
 {% extends 'tp_final/base.html' %}
+{% block contenido %}
+<ul>
+{% for post in object_list %}
+    <li>{{post.titulo}}</li>
+{% endfor %}
+</ul>
+{% endblock %}
