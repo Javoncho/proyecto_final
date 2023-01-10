@@ -1,8 +1,16 @@
 {% extends 'tp_final/base.html' %}
+
 {% block contenido %}
+<a href="{% url 'tp_final-crear' %}">Crear Post</a>
+
 <ul>
 {% for post in object_list %}
-    <li>{{post.titulo}}</li>
+    <li>
+        {{post.publicado_el}} - - {{post.titulo}}
+        <a href="{% url 'tp_final-borrar' post.id %}">Borrar</a>
+        <a href="{% url 'tp_final-actualizar' post.id %}">Actualizar</a>
+        <a href="{% url 'tp_final-detalle' post.id %}">Ver</a>
+    </li>
 {% endfor %}
 </ul>
 {% endblock %}

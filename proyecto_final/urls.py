@@ -13,9 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
@@ -25,10 +22,6 @@ from ejemplo.views import (index, buscar, monstrar_familiares,
                             BuscarFamiliar, AltaFamiliar,
                             ActualizarFamiliar, BorrarFamiliar,
                             FamiliarList, FamiliarCrear, FamiliarBorrar, FamiliarActualizar, FamiliarDetalle)
-
-from tp_final.views import (index, PostList, PostCrear, PostActualizar, PostDetalle, PostBorrar, 
-                            PostActualizar, UserSignUp, UserLogin, UserLogout, AvatarActualizar, 
-                            UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,21 +39,4 @@ urlpatterns = [
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
     path('panel-familia/<int:pk>/detalle', FamiliarDetalle.as_view()),
     path('success_updated_message/',TemplateView.as_view(template_name="ejemplo/success_updated_message.html")),
-    path('tp_final/', index, name = "tp_final-index"),
-    path('tp_final/listar/', PostList.as_view(), name = "tp_final-listar"),
-    path('tp_final/crear/', PostCrear.as_view(), name = "tp_final-crear"),
-    path('tp_final/<int:pk>/detalle/', PostDetalle.as_view(), name = "tp_final-detalle"),
-    path('tp_final/<int:pk>/borrar/', PostBorrar.as_view(), name = "tp_final-borrar"),
-    path('tp_final/<int:pk>/actualizar/', PostActualizar.as_view(), name = "tp_final-actualizar"),
-    path('tp_final/signup/', UserSignUp.as_view(), name = 'tp_final-signup'),
-    path('tp_final/login/', UserLogin.as_view(), name = 'tp_final-login'),
-    path('tp_final/logout/', UserLogout.as_view(), name = 'tp_final-logout'),
-    path('tp_final/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="tp_final-avatars-actualizar"),
-    path('tp_final/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="tp_final-users-actualizar"),
-    path('tp_final/mensajes/crear/', MensajeCrear.as_view(), name="tp_final-mensajes-crear"),
-    path('tp_final/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="tp_final-mensajes-detalle"),
-    path('tp_final/mensajes/listar/', MensajeListar.as_view(), name="tp_final-mensajes-listar")
-
 ]
-
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
