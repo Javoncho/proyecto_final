@@ -1,18 +1,20 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
-from tp_final.models import Post, Mensaje, Avatar
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.admin import User
+from tp_final.models import Post, Mensaje, Avatar
 from tp_final.forms import UsuarioForm
 
 # Create your views here.
 
 def index(request):
-    return render(request, "tp_final/index.html", {})
+#    return render(request, "tp_final/index.html", {})
+    posts = Post.objects.order_by('-publicado_el').all()
+    return render(request, "tp_final/index.html", {"posts": posts})
 
 class PostDetalle(DetailView):
     model = Post    
@@ -32,6 +34,7 @@ class PostBorrar(LoginRequiredMixin, DeleteView):
 class PostActualizar(LoginRequiredMixin, UpdateView):
     model = Post
     success_url = reverse_lazy("tp_final-listar")
+    fields = "__all__"
 
 class UserSignUp(CreateView):
     form_class = UsuarioForm

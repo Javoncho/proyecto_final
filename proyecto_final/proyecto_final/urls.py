@@ -28,7 +28,11 @@ from ejemplo.views import (index, buscar, monstrar_familiares,
 
 from tp_final.views import (index, PostList, PostCrear, PostActualizar, PostDetalle, PostBorrar, 
                             PostActualizar, UserSignUp, UserLogin, UserLogout, AvatarActualizar, 
-                            UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle)
+                            UserActualizar, MensajeCrear, MensajeListar, MensajeDetalle,
+                            MensajeBorrar)
+
+from django.contrib.admin.views.decorators import staff_member_required
+                
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -48,7 +52,7 @@ urlpatterns = [
     path('success_updated_message/',TemplateView.as_view(template_name="ejemplo/success_updated_message.html")),
     path('tp_final/', index, name = "tp_final-index"),
     path('tp_final/listar/', PostList.as_view(), name = "tp_final-listar"),
-    path('tp_final/crear/', PostCrear.as_view(), name = "tp_final-crear"),
+    path('tp_final/crear/', staff_member_required(PostCrear.as_view()), name = "tp_final-crear"),
     path('tp_final/<int:pk>/detalle/', PostDetalle.as_view(), name = "tp_final-detalle"),
     path('tp_final/<int:pk>/borrar/', PostBorrar.as_view(), name = "tp_final-borrar"),
     path('tp_final/<int:pk>/actualizar/', PostActualizar.as_view(), name = "tp_final-actualizar"),
@@ -59,7 +63,10 @@ urlpatterns = [
     path('tp_final/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="tp_final-users-actualizar"),
     path('tp_final/mensajes/crear/', MensajeCrear.as_view(), name="tp_final-mensajes-crear"),
     path('tp_final/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="tp_final-mensajes-detalle"),
-    path('tp_final/mensajes/listar/', MensajeListar.as_view(), name="tp_final-mensajes-listar")
+    path('tp_final/mensajes/listar/', MensajeListar.as_view(), name="tp_final-mensajes-listar"),
+    path('tp_final/mensajes/<int:pk>/borrar/', MensajeBorrar.as_view(), name="tp_final-mensajes-borrar"),
+    path('tp_final/mensajes/borrar/', MensajeListar.as_view(), name="tp_final-mensajes-listar"),
+    path('tp_final/about', TemplateView.as_view(template_name='tp_final/about.html'), name="tp_final-about"),
 
 ]
 

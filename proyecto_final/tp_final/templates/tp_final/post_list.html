@@ -1,15 +1,22 @@
 {% extends 'tp_final/base.html' %}
 
 {% block contenido %}
-<a href="{% url 'tp_final-crear' %}">Crear Post</a>
-
+{% if user.is_authenticated %}
+    <a href="{% url 'tp_final-crear' %}">Crear Post</a>
+    <a href="{% url 'tp_final-mensajes-listar' %}">Ver Mensajes</a>
+    <a href="{% url 'tp_final-users-actualizar' user.id %}">Actualizar User</a>
+    <a href="{% url 'tp_final-avatars-actualizar' user.id %}">Actualizar Avatar</a>
+{% endif %}
 <ul>
 {% for post in object_list %}
     <li>
         {{post.publicado_el}} - - {{post.titulo}}
-        <a href="{% url 'tp_final-borrar' post.id %}">Borrar</a>
-        <a href="{% url 'tp_final-actualizar' post.id %}">Actualizar</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'tp_final-borrar' post.id %}">Borrar</a>
+            <a href="{% url 'tp_final-actualizar' post.id %}">Actualizar</a>
+        {% endif %}
         <a href="{% url 'tp_final-detalle' post.id %}">Ver</a>
+        
     </li>
 {% endfor %}
 </ul>

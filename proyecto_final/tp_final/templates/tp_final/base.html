@@ -22,27 +22,29 @@
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'tp_final-index' %}">
-                    {%if user.is_authenticated  and  user.avatar.imagen %}
+                    {% if user.is_authenticated  and  user.avatar.imagen %}
                     <img src="{{user.avatar.imagen.url}}" height="64">
-                      Hola, {{user.first_name}} |
+                        Hola, {{user.first_name}} |
                     {% endif %} 
-                    Start Bootstrap</a>
+                    Start Bootstrap
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-index' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-about' %}">Acerca de...</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>> -->
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-signup' %}">Registrarse</a></li>
                         {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-listar' %}">Admin Blog</a></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-logout' %}">Salir</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-login' %}">Ingresar</a></li>
                         {% endif %}
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'tp_final-mensajes-crear' %}">Contacto</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +64,7 @@
         </header>
         <!-- Main Content-->
 
-        {% block contenido %} {% endblock %}
+        {% block contenido %}  {% endblock %}
         
         <!-- Footer-->
         <footer class="border-top">
